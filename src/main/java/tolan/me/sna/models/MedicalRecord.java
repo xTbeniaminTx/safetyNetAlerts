@@ -18,6 +18,41 @@ public class MedicalRecord {
   private String lastName;
   private LocalDate birthdate;
 //  private List<Medication> medications;
-//  private String[] allergies;
+//  private List<Allergy> allergies;
+
+  public MedicalRecord() {
+  }
+
+  public MedicalRecord(String firstName, String lastName, LocalDate birthdate) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthdate = birthdate;
+//    this.medications = medications;
+//    this.allergies = allergies;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public LocalDate getBirthdate() {
+    return birthdate;
+  }
+
+  public void setBirthdate(LocalDate birthdate) {
+    this.birthdate = birthdate;
+  }
 
 }
