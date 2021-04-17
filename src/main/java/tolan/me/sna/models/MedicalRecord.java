@@ -17,7 +17,7 @@ public class MedicalRecord {
   private String firstName;
   private String lastName;
   private LocalDate birthdate;
-//  private List<Medication> medications;
+//  private Medication[] medications;
 //  private List<Allergy> allergies;
 
   public MedicalRecord() {
