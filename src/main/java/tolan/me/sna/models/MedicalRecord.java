@@ -2,12 +2,15 @@ package tolan.me.sna.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class MedicalRecord {
@@ -18,27 +21,15 @@ public class MedicalRecord {
 
   private String firstName;
   private String lastName;
-  private LocalDate birthdate;
+
+  @Temporal(TemporalType.DATE)
+  private Date birthdate;
 
   @ManyToMany
   private List<Medication> medications = new ArrayList<>();
 
   @ManyToMany
   private List<Allergy> allergies = new ArrayList<>();
-
-  public MedicalRecord() {
-  }
-
-  public MedicalRecord(long medicalRecordId, String firstName, String lastName,
-      LocalDate birthdate, List<Medication> medications,
-      List<Allergy> allergies) {
-    this.medicalRecordId = medicalRecordId;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthdate = birthdate;
-    this.medications = medications;
-    this.allergies = allergies;
-  }
 
   public long getMedicalRecordId() {
     return medicalRecordId;
@@ -64,11 +55,11 @@ public class MedicalRecord {
     this.lastName = lastName;
   }
 
-  public LocalDate getBirthdate() {
+  public Date getBirthdate() {
     return birthdate;
   }
 
-  public void setBirthdate(LocalDate birthdate) {
+  public void setBirthdate(Date birthdate) {
     this.birthdate = birthdate;
   }
 

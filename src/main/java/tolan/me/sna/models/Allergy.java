@@ -14,27 +14,12 @@ public class Allergy {
 
   private String allergyName;
 
-  public Allergy() {
-  }
-
-  public Allergy(String allergyName) {
-    this.allergyName = allergyName;
-  }
-
   public String getAllergyName() {
     return allergyName;
   }
 
   public void setAllergyName(String allergyName) {
     this.allergyName = allergyName;
-  }
-
-  @Override
-  public String toString() {
-    return "Allergy{" +
-        "allergyId=" + allergyId +
-        ", allergyName='" + allergyName + '\'' +
-        '}';
   }
 
 }

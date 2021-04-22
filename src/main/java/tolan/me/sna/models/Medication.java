@@ -15,13 +15,6 @@ public class Medication {
   private String drugName;
   private String dosage;
 
-  public Medication() {
-  }
-
-  public Medication(String drugName, String dosage) {
-    this.drugName = drugName;
-    this.dosage = dosage;
-  }
 
   public String getDrugName() {
     return drugName;
