@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class FireStation {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long fireStationId;
 
   private String address;

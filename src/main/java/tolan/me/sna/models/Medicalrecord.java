@@ -1,23 +1,26 @@
 package tolan.me.sna.models;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class MedicalRecord {
+public class Medicalrecord {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private long medicalRecordId;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
   private String firstName;
   private String lastName;
@@ -25,18 +28,26 @@ public class MedicalRecord {
   @Temporal(TemporalType.DATE)
   private Date birthdate;
 
-  @ManyToMany
-  private List<Medication> medications = new ArrayList<>();
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "medicalrecords_medications",
+      joinColumns = @JoinColumn(name = "medical_record_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "medication_id", referencedColumnName = "id"))
+  private List<Medication> medications;
 
-  @ManyToMany
-  private List<Allergy> allergies = new ArrayList<>();
 
-  public long getMedicalRecordId() {
-    return medicalRecordId;
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "medicalrecords_allergies",
+      joinColumns = @JoinColumn(name = "medical_record_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "allergy_id", referencedColumnName = "id"))
+  private List<Allergy> allergies;
+
+
+  public long getId() {
+    return id;
   }
 
-  public void setMedicalRecordId(long medicalRecordId) {
-    this.medicalRecordId = medicalRecordId;
+  public void setId(long id) {
+    this.id = id;
   }
 
   public String getFirstName() {
