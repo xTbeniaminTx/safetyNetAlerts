@@ -11,9 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import tolan.me.sna.dao.AllergyRepository;
 import tolan.me.sna.dao.MedicalRecordRepository;
 import tolan.me.sna.dao.MedicationRepository;
+import tolan.me.sna.dao.PersonRepository;
 
 @SpringBootTest
 class MedicalrecordTest {
+
+  @Autowired
+  PersonRepository personRepository;
 
   @Autowired
   MedicalRecordRepository recordRepository;
@@ -27,8 +31,8 @@ class MedicalrecordTest {
   @Test
   public void testCreateMedicalRecord() {
     Medicalrecord medicalRecord = new Medicalrecord();
-    medicalRecord.setFirstName("Toot");
-    medicalRecord.setLastName("Goth");
+//    medicalRecord.setFirstName("Toot");
+//    medicalRecord.setLastName("Goth");
     medicalRecord.setBirthdate(new Date());
 
     Medication medication = new Medication();
@@ -54,6 +58,14 @@ class MedicalrecordTest {
     medicationArrayList.add(medication);
     medicationArrayList.add(medication2);
     medicalRecord.setMedications(medicationArrayList);
+
+    Person person = new Person();
+    person.setFirstName("Test medical REcod");
+    person.setMedicalrecord(medicalRecord);
+
+    personRepository.save(person);
+//
+//    medicalRecord.setPerson(person);
 
     recordRepository.save(medicalRecord);
   }

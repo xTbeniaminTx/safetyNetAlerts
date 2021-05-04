@@ -2,6 +2,7 @@ package tolan.me.sna.controllers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import tolan.me.sna.models.Person;
 import tolan.me.sna.services.PersonService;
 
 @RestController
-@RequestMapping("/medicalRecord")
+@RequestMapping("/medicalRecord/")
 public class MedicalRecordRestController {
 
   @Autowired
@@ -23,5 +24,8 @@ public class MedicalRecordRestController {
   public void createPerson(@RequestBody Person person) throws Exception {
     personService.createPerson(person);
   }
+
+
+
 
 }

@@ -1,8 +1,11 @@
 package tolan.me.sna.services;
 
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import tolan.me.sna.controllers.api.dto.PersonInfoDto;
 import tolan.me.sna.dao.PersonRepository;
 import tolan.me.sna.models.Person;
 
@@ -19,5 +22,14 @@ public class PersonService {
     } else {
       personRepo.save(person);
     }
+  }
+
+  public PersonInfoDto getInfo(String firstName, String lastName) {
+    Person byFirstNameAndLastName = personRepo.findByFirstNameAndLastName(firstName, lastName);
+    PersonInfoDto personInfoDto = new PersonInfoDto();
+    personInfoDto.setFirstName(byFirstNameAndLastName.getFirstName());
+    personInfoDto.setLastName(byFirstNameAndLastName.getLastName());
+
+    return personInfoDto;
   }
 }

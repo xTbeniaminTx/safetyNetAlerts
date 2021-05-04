@@ -5,4 +5,5 @@ import tolan.me.sna.models.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+  public Person findByFirstNameAndLastName(String firstName, String lastName);
 }

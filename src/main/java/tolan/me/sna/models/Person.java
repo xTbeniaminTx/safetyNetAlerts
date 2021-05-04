@@ -1,16 +1,20 @@
 package tolan.me.sna.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long personId;
+  private long id;
 
   private String firstName;
   private String lastName;
@@ -20,6 +24,13 @@ public class Person {
   private String phone;
   private String email;
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinTable(name = "person_medicalrecord",
+      joinColumns =
+          { @JoinColumn(name = "person_id", referencedColumnName = "id") },
+      inverseJoinColumns =
+          { @JoinColumn(name = "md_id", referencedColumnName = "id") })
+  private Medicalrecord medicalrecord;
 
   public String getFirstName() {
     return firstName;
@@ -77,10 +88,26 @@ public class Person {
     this.email = email;
   }
 
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public Medicalrecord getMedicalrecord() {
+    return medicalrecord;
+  }
+
+  public void setMedicalrecord(Medicalrecord medicalrecord) {
+    this.medicalrecord = medicalrecord;
+  }
+
   @Override
   public String toString() {
     return "Person{" +
-        "personId=" + personId +
+        "id=" + id +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
         ", address='" + address + '\'' +
@@ -88,6 +115,7 @@ public class Person {
         ", zip=" + zip +
         ", phone='" + phone + '\'' +
         ", email='" + email + '\'' +
+        ", medicalrecord=" + medicalrecord +
         '}';
   }
 }

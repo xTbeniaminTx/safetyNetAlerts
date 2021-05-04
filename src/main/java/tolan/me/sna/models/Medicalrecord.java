@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,8 +23,6 @@ public class Medicalrecord {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String firstName;
-  private String lastName;
 
   @Temporal(TemporalType.DATE)
   private Date birthdate;
@@ -42,6 +41,13 @@ public class Medicalrecord {
   private List<Allergy> allergies;
 
 
+  @OneToOne(mappedBy = "medicalrecord", cascade = {
+      CascadeType.MERGE,
+      CascadeType.PERSIST
+  })
+  private Person person;
+
+
   public long getId() {
     return id;
   }
@@ -50,21 +56,7 @@ public class Medicalrecord {
     this.id = id;
   }
 
-  public String getFirstName() {
-    return firstName;
-  }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
 
   public Date getBirthdate() {
     return birthdate;
@@ -88,5 +80,24 @@ public class Medicalrecord {
 
   public void setAllergies(List<Allergy> allergies) {
     this.allergies = allergies;
+  }
+
+  public Person getPerson() {
+    return person;
+  }
+
+  public void setPerson(Person person) {
+    this.person = person;
+  }
+
+  @Override
+  public String toString() {
+    return "Medicalrecord{" +
+        "id=" + id +
+        ", birthdate=" + birthdate +
+        ", medications=" + medications +
+        ", allergies=" + allergies +
+        ", person=" + person +
+        '}';
   }
 }
